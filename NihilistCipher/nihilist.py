@@ -82,7 +82,8 @@ else:
         mensajeEnNumeros = []
         for letra in mensaje:
             #print letra + str(matriz[letra])
-            mensajeEnNumeros.append(int(matriz[letra]))
+            if (letra !=" "):
+                mensajeEnNumeros.append(int(matriz[letra]))
             #print mensajeEnNumeros
 
         #3. Extraemos la segunda clave del parámetro 2

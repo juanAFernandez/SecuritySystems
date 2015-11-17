@@ -21,11 +21,12 @@ if len(sys.argv) != 4:
         #El programa no tiene los argumentos necesarios:
         print "Este programa necesita 4 parámetros";
         print "1. Clave 1"  
-        print "2. Mensaje"
-        print "4. c=cifra d=descifra"
+        print "2. nombre del fichero"
+        print "3. c=cifra d=descifra"
+
 else:
     #El programa se ejecuta:
-
+    
     #Independientemente de que se esté cifrando o no la mariz hay que construirla con la clave1 y el abecedario.
 
     #1.Extraemos la clave del parámetro número 1.
@@ -54,6 +55,7 @@ else:
         ABCdario.insert(0,claveSinRepetidos[i])
 
     #4. Creamos una matriz (como un diccionario) a la que le introducimos los valores filas-columna y la letra que representan del ABCdario construido
+
     matriz = {}
     contador = 0
     for a in range(1,6):
@@ -62,23 +64,28 @@ else:
             #print str(a)+str(b)+ABCdario[contador]
             contador+=1
 
+
     if(sys.argv[3]=='c'):
         print 'Cifrando...'
 
           #1. Extraemos el mensaje del parámetro 2.
-        mensaje=sys.argv[2]
-        #Obtenemos su tamaño.
-        tamMensaje=len(mensaje)
-
+        mensaje=open(sys.argv[2], "r")
+        
         #2.Creamos una lista donde guardaremos el mensaje convertido en números haciendo sustituciones en la matriz.
         textoFinalCifrado = []
-        for letra in mensaje:
-            textoFinalCifrado.append(int(matriz[letra]))
+        puedeSeguir = True
+        while puedeSeguir:
+        	letra=mensaje.read(1)
+        	if (letra =='' or letra == '\n'):
+        		puedeSeguir = False
+        	elif (letra !=" "):
+        		textoFinalCifrado.append(int(matriz[letra]))
 
-        print "Texto cifrado: "
+        
+        fichero = open ("salida.txt", "w")
 
         for numero in range(len(textoFinalCifrado)):
-            print textoFinalCifrado[numero],
+            fichero.write(str(textoFinalCifrado[numero]))
 
 
     if(sys.argv[3]=='d'):
