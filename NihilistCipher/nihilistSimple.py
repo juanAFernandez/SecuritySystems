@@ -69,7 +69,7 @@ else:
         print 'Cifrando...'
 
           #1. Extraemos el mensaje del parámetro 2.
-        mensaje=open(sys.argv[2], "r")
+        mensaje=open(sys.argv[2], 'r')
         
         #2.Creamos una lista donde guardaremos el mensaje convertido en números haciendo sustituciones en la matriz.
         textoFinalCifrado = []
@@ -82,7 +82,7 @@ else:
         		textoFinalCifrado.append(int(matriz[letra]))
 
         
-        fichero = open ("salida.txt", "w")
+        fichero = open ('cifrado.txt', 'w')
 
         for numero in range(len(textoFinalCifrado)):
             fichero.write(str(textoFinalCifrado[numero]))
@@ -97,20 +97,20 @@ else:
         será una letra, por tanto una unidad en el mensaje original.
         '''
 
-        #1. Obtenemos el tamaño del mensaje a descifrar.
-        numeros=sys.argv[2]
-        tamMensaje=len(numeros)/2
+        #1. Abrir el fichero para lectura.
+        numeros= open(sys.argv[2], 'r')
         
-        #2.Restamos los números extraidos del texto cifrado pasado divididos en grupos de dos cifras - el mensaje2 en números.
-
-        #Para ello extremos los números de parámetro pasado
-        size=len(numeros)/2
+        #Leemos nuestro fichero a descifrar
         listaNumerosPasados =[]
 
-        for a in range(size):
-            listaNumerosPasados.append(int(numeros[0:2]))
-            numeros=numeros[2:]
-
+        puedeSeguir = True
+        while puedeSeguir:
+        	pareja = numeros.read(2)
+        	if pareja=='':
+        		puedeSeguir=False
+        	else:
+        		listaNumerosPasados.append(int(pareja))
+            
         
         #3.Extraemos el texto descifrado sustituyendo en la matriz.
         textoFinalDescifrado = ''
@@ -118,5 +118,9 @@ else:
         for numero in listaNumerosPasados:
             textoFinalDescifrado+=str(inv_matriz[numero])
 
-        #4.Imprimos el mensaje:
-        print 'Texto descifrado: \n' + textoFinalDescifrado
+
+        #4. Escribimos texto descifrado en el fichero
+        fichero = open ('descifrado.txt', 'w')
+        for letra in range(len(textoFinalDescifrado)):
+        	fichero.write(str(textoFinalDescifrado[letra]))
+
