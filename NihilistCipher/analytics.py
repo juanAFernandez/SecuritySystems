@@ -41,8 +41,11 @@ else:
 
 
     #Eliminamos metacaracteres leidos desde el fichero.
+    del tabla['']
+    del tabla['\n']
 
     print tabla
+
 
     #n.Cerramos el fichero
     fichero.close()
