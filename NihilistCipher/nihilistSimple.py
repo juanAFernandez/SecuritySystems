@@ -106,7 +106,7 @@ else:
         puedeSeguir = True
         while puedeSeguir:
         	pareja = numeros.read(2)
-        	if pareja=='':
+        	if pareja=='' or pareja=='\n':
         		puedeSeguir=False
         	else:
         		listaNumerosPasados.append(int(pareja))
