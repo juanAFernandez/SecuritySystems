@@ -1,0 +1,67 @@
+<!--
+Fichero base que sirve de esqueleto para el resto de pestañas. Probablemente sea necesaria
+una base para cada tipo de usuario, ya que tendrá un menú distinto, aunque por ahora sólo
+contemplaremos el perfil de administrador.
+-->
+<html>
+  <head>
+    <title>NihilistCipher</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Cargamos la librería uikit-->
+    <link rel="stylesheet" type="text/css" href="/static/css/uikit.docs.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/uikit.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/uikit.tema1.css"/>
+    <!--Cargamos la librería JQuery-->
+    <script src="/static/jquery.js"></script>
+    <!--Cargamos la librería JavaScript de uikit-->
+    <script src="/static/js/uikit.min.js"></script>
+
+  </head>
+
+
+  <body>
+
+    <!-- Div principal de toda la pantalla -->
+    <div class="uk-container uk-container-center uk-margin-top ">
+
+
+
+             <h2>Entrada</h2>
+             <form class="uk-form" id="envioDatos" action="/use" method="post">
+                    <textarea name="texto" cols="100" rows="5" placeholder="Texto">{{textoOriginal}}</textarea>
+                    <br>
+                    <textarea name="clave" cols="30" rows="1" placeholder="Clave">{{clave}}</textarea>
+                    <br>
+                    <input class="uk-button" type="submit" name="tipo" value="cifrar">
+                    <input class="uk-button" type="submit" name="tipo" value="descifrar">
+
+
+             </form>
+
+
+
+         <h2>Salida</h2>
+         <form class="uk-form" action="/use" method="post">
+           <textarea name="mensajeDescifrado" cols="100"rows="5" placeholder="Salida">{{mensaje}}</textarea>
+           {% if mensaje %}
+           <br>
+           <br>
+           <input class="uk-button" type="submit" name="tipo" value="Analizar!">
+           {% endif %}
+         </form>
+
+
+
+
+        </div> <!--fin grid-->
+
+
+    </div><!--Fin del primer div-->
+
+
+  </body>
+
+
+</html>

@@ -1,0 +1,312 @@
+<!--
+Fichero base que sirve de esqueleto para el resto de pestañas. Probablemente sea necesaria
+una base para cada tipo de usuario, ya que tendrá un menú distinto, aunque por ahora sólo
+contemplaremos el perfil de administrador.
+-->
+<html>
+  <head>
+    <title>NihilistCipher</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Cargamos la librería uikit-->
+    <link rel="stylesheet" type="text/css" href="/static/css/uikit.docs.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/uikit.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/uikit.tema1.css"/>
+     <!--Cargamos la librería JQuery-->
+     <script src="/static/jquery.js"></script>
+     <!--Cargamos la librería JavaScript de uikit-->
+     <script src="/static/js/uikit.min.js"></script>
+
+
+
+   <script src="/static/js/highcharts.js"></script>
+
+  </head>
+
+
+  <body>
+
+   <!-- Div principal de toda la pantalla -->
+   <div class="uk-container uk-container-center uk-margin-top ">
+
+
+     <form class="uk-form" id="envioDatos" action="/atack" method="post">
+            <textarea id="textoCifrado" name="texto" cols="100" rows="5" placeholder="Texto Cifrado">{{textoCifrado}}</textarea>
+            <br>
+            <br>
+            <input class="uk-button" type="submit" name="tipo" value="Analizar">
+     </form>
+
+     <!--Sección de análisis-->
+
+
+     {% if tabla %}
+
+     <div class="uk-grid" data-uk-grid-margin>
+
+                     <div class="uk-width-medium-1-2">
+                         <div id="container" style="width:100%; height:400px;"></div>
+                         <script type="text/javascript">
+                         $(function () {
+                              $('#container').highcharts({
+                              chart: {
+                                 type: 'line'
+                              },
+                              title: {
+                                 text: 'Indice de Coincidencia'
+                              },
+                              xAxis: {
+                                 //Cargamos las claves del diccionario en categorías
+                                 categories: {{tabla.keys()}}
+                              },
+                              yAxis: {
+                                 title: {
+                                     text: 'Nº Ocurrencias'
+                                 }
+                              },
+                              plotOptions: {
+                                 line: {
+                                     dataLabels: {
+                                         enabled: true
+                                     },
+                                     enableMouseTracking: false
+                                 }
+                              },
+                              series: [ {
+                                 name: 'Ocurrencias',
+                                 //Cargamos los valores del diccionario en datos.
+                                 data: {{tabla.values()}}
+                              }]
+                              });
+                              });
+                         </script>
+                     </div>
+
+                     <div class="uk-width-medium-1-2">
+                       <!--Matriz de elementos -->
+                       <form class="uk-form">
+                        <table class="uk-table">
+                           <caption>Matriz de sustitución</caption>
+                           <thead>
+                               <tr>
+                                   <th></th>
+                                   <th>1</th>
+                                   <th>2</th>
+                                   <th>3</th>
+                                   <th>4</th>
+                                   <th>5</th>
+
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <td>1</td>
+                                   <td><input id='11' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='12' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='13' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='14' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='15' type="text" placeholder="" class="uk-form-width-mini"></td>
+                               </tr>
+                               <tr>
+                                   <td>2</td>
+                                   <td><input id='21' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='22' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='23' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='24' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='25' type="text" placeholder="" class="uk-form-width-mini"></td>
+                               </tr>
+                               <tr>
+                                   <td>3</td>
+                                   <td><input id='31' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='32' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='33' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='34' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='35' type="text" placeholder="" class="uk-form-width-mini"></td>
+                               </tr>
+                               <tr>
+                                   <td>4</td>
+                                   <td><input id='41' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='42' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='43' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='44' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='45' type="text" placeholder="" class="uk-form-width-mini"></td>
+                               </tr>
+                               <tr>
+                                   <td>5</td>
+                                   <td><input id='51' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='52' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='53' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='54' type="text" placeholder="" class="uk-form-width-mini"></td>
+                                   <td><input id='55' type="text" placeholder="" class="uk-form-width-mini"></td>
+                               </tr>
+                           </tbody>
+                       </table>
+                       </form>
+
+                       <!--Hacemos que el botón llame a una función de JavaScript-->
+                       <input class="uk-button uk-margin-top" name="tipo" type="button" value="Sustituir" onclick="Sustituir();"/>
+
+                     </div>
+
+     </div>
+
+
+
+    <h2>Resultado</h2>
+    <form class="uk-form" id="envioDatos" action="/atack" method="post">
+       <fieldset data-uk-margin>
+           <textarea id="textoSustituido" name="texto" cols="100" rows="5" placeholder="Sustitución"></textarea>
+           <br>
+       </fieldset>
+    </form>
+
+    {% endif %}
+
+
+  <!-- Footer -->
+  <div class=" uk-slider-container">
+
+    <div class="uk-container uk-container-center uk-text-center">
+
+        <br>
+        <br>
+
+                 <div class="uk-panel">
+                     <p>Granada @ Noviembre 2015</a>
+                     </p>
+                 </div>
+
+        <br>
+        <br>
+
+
+  </div>
+
+  </div>  <!-- fin footer -->
+
+</div><!--Fin del primer div-->
+
+
+  </body>
+
+
+</html>
+
+
+
+
+<script>
+  //Ejecución de la función, cada vez que el usuario pulsa sustituir.
+  function Sustituir(){
+    //Primero extraemos el texto que el usuario ha introducido como cifrado.
+    var textoOriginalCifrado=document.getElementById('textoCifrado').value;
+
+    //Creamos una variable donde vamos a guardar el texto procesado.
+    var textoProcesado="";
+
+    //Extraemos los valores de todas las celdas:
+    var celda11 = document.getElementById('11').value;
+    var celda12 = document.getElementById('12').value;
+    var celda13 = document.getElementById('13').value;
+    var celda14 = document.getElementById('14').value;
+    var celda15 = document.getElementById('15').value;
+
+    var celda21 = document.getElementById('21').value;
+    var celda22 = document.getElementById('22').value;
+    var celda23 = document.getElementById('23').value;
+    var celda24 = document.getElementById('24').value;
+    var celda25 = document.getElementById('25').value;
+
+    var celda31 = document.getElementById('31').value;
+    var celda32 = document.getElementById('32').value;
+    var celda33 = document.getElementById('33').value;
+    var celda34 = document.getElementById('34').value;
+    var celda35 = document.getElementById('35').value;
+
+    var celda41 = document.getElementById('41').value;
+    var celda42 = document.getElementById('42').value;
+    var celda43 = document.getElementById('43').value;
+    var celda44 = document.getElementById('44').value;
+    var celda45 = document.getElementById('45').value;
+
+    var celda51 = document.getElementById('51').value;
+    var celda52 = document.getElementById('52').value;
+    var celda53 = document.getElementById('53').value;
+    var celda54 = document.getElementById('54').value;
+    var celda55 = document.getElementById('55').value;
+
+
+    /*Si las celdas no están vacías sustituimos el valor del número de dos dígitos que representa por la letra introducida
+    en la casilla de texto.*/
+    var tmp="";
+
+    for(i=0; i<textoOriginalCifrado.length; i+=2){
+      //En tmp extraemos dos cifras de la cadena de números
+      tmp=textoOriginalCifrado[i]+textoOriginalCifrado[i+1];
+
+      if(tmp==11 && celda11!='')
+        textoProcesado+=celda11;
+      else if(tmp==12 && celda12!='')
+        textoProcesado+=celda12;
+      else if(tmp==13 && celda13!='')
+        textoProcesado+=celda13;
+      else if(tmp==14 && celda14!='')
+        textoProcesado+=celda14;
+      else if(tmp==15 && celda15!='')
+        textoProcesado+=celda15;
+
+        else if(tmp==21 && celda21!='')
+          textoProcesado+=celda21;
+        else if(tmp==22 && celda22!='')
+          textoProcesado+=celda22;
+        else if(tmp==23 && celda23!='')
+          textoProcesado+=celda23;
+        else if(tmp==24 && celda24!='')
+          textoProcesado+=celda24;
+        else if(tmp==25 && celda25!='')
+          textoProcesado+=celda25;
+
+          else if(tmp==31 && celda31!='')
+            textoProcesado+=celda31;
+          else if(tmp==32 && celda32!='')
+            textoProcesado+=celda32;
+          else if(tmp==33 && celda33!='')
+            textoProcesado+=celda33;
+          else if(tmp==34 && celda34!='')
+            textoProcesado+=celda34;
+          else if(tmp==35 && celda35!='')
+            textoProcesado+=celda35;
+
+
+            else if(tmp==41 && celda41!='')
+              textoProcesado+=celda41;
+            else if(tmp==42 && celda42!='')
+              textoProcesado+=celda42;
+            else if(tmp==43 && celda13!='')
+              textoProcesado+=celda43;
+            else if(tmp==44 && celda44!='')
+              textoProcesado+=celda44;
+            else if(tmp==45 && celda45!='')
+              textoProcesado+=celda45;
+
+              else if(tmp==51 && celda51!='')
+                textoProcesado+=celda51;
+              else if(tmp==52 && celda52!='')
+                textoProcesado+=celda52;
+              else if(tmp==53 && celda53!='')
+                textoProcesado+=celda53;
+              else if(tmp==54 && celda54!='')
+                textoProcesado+=celda54;
+              else if(tmp==55 && celda55!='')
+                textoProcesado+=celda55;
+
+      else
+        textoProcesado+=tmp;
+    }
+
+    document.getElementById('textoSustituido').value=textoProcesado;
+    //document.getElementById('textoSustituido').value='Hola cara-culo';
+
+  }
+</script>
