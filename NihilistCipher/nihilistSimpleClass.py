@@ -67,8 +67,11 @@ class NihilistCipher(object):
         textoFinalCifrado = []
         mensaje=mensaje.lower()
         for letra in mensaje:
-            if (letra !=' ' and letra != '\n' and letra != '\r' and letra !=',' and letra !=';' and letra !='.' and letra!='\'' and letra!='-'):
-                textoFinalCifrado.append(int(matriz[letra]))
+            #Asi si lo extraido no se encuentra en la matriz (como signos de puntuación o letras que no usamos como la j no las analiza)
+            extracto=matriz.get(letra)
+            if extracto!=None:
+                textoFinalCifrado.append(int(extracto))
+
 
         mensajeCifrado=""
 
