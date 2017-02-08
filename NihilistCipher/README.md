@@ -1,1 +1,1 @@
-Criptosistema Nihilista clásico implementado en python.
+Clasic Nihilist Cryptosystem implemented in python.

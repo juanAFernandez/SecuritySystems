@@ -1,6 +1,17 @@
 # Security Systems
-A bit approach to computer security systems.
+A repo to develop simple apps to try some very simple cryptographic algorithms.
+
+Projects list:
+
 * NihilistCipher
 
 NihilistCipher app is available online [here](http://nihilist-cipher.appspot.com/).
-For run app in local run ./run.sh
+
+
+**Requirements:**
+
+Execute bash file *requirements.sh*
+
+**Run:**
+
+For run app in local execute *run.sh*
